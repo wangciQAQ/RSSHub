@@ -7,7 +7,7 @@ import { load } from 'cheerio';
 import got from '@/utils/got';
 import { parseDate } from '@/utils/parse-date';
 import { art } from '@/utils/render';
-import * as path from 'node:path';
+import path from 'node:path';
 import { setCookies } from '@/utils/puppeteer-utils';
 import { CookieJar } from 'tough-cookie';
 import logger from '@/utils/logger';
@@ -15,10 +15,12 @@ import puppeteer from '@/utils/puppeteer';
 
 export const route: Route = {
     path: '/:topicPath{.+}?',
-    radar: {
-        source: ['pnas.org/*topicPath'],
-        target: '/:topicPath',
-    },
+    radar: [
+        {
+            source: ['pnas.org/*topicPath'],
+            target: '/:topicPath',
+        },
+    ],
     name: 'Unknown',
     maintainers: [],
     handler,
@@ -106,7 +108,7 @@ async function handler(ctx) {
         )
     );
 
-    browser.close();
+    await browser.close();
 
     return {
         title: `${$('.banner-widget__content h1').text()} - PNAS`,

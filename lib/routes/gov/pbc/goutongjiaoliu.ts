@@ -18,9 +18,11 @@ export const route: Route = {
         supportPodcast: false,
         supportScihub: false,
     },
-    radar: {
-        source: ['pbc.gov.cn/goutongjiaoliu/113456/113469/index.html'],
-    },
+    radar: [
+        {
+            source: ['pbc.gov.cn/goutongjiaoliu/113456/113469/index.html'],
+        },
+    ],
     name: '沟通交流',
     maintainers: ['nczitzk'],
     handler,
@@ -73,7 +75,7 @@ async function handler() {
         )
     );
 
-    browser.close();
+    await browser.close();
 
     return {
         title: '中国人民银行 - 沟通交流',

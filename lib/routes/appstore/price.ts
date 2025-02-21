@@ -18,9 +18,11 @@ export const route: Route = {
         supportPodcast: false,
         supportScihub: false,
     },
-    radar: {
-        source: ['apps.apple.com/'],
-    },
+    radar: [
+        {
+            source: ['apps.apple.com/'],
+        },
+    ],
     name: 'Price Drop',
     maintainers: ['HenryQW'],
     handler,
@@ -48,7 +50,6 @@ async function handler(ctx) {
             title: unsupported,
             item: [{ title: unsupported }],
         };
-        return;
     }
 
     let result = res.data.results.apps;

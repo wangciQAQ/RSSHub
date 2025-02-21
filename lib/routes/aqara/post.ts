@@ -7,7 +7,7 @@ import got from '@/utils/got';
 import { load } from 'cheerio';
 import { parseDate } from '@/utils/parse-date';
 import { art } from '@/utils/render';
-import * as path from 'node:path';
+import path from 'node:path';
 
 export const route: Route = {
     path: '*',
@@ -31,7 +31,7 @@ async function handler(ctx) {
 
     if (filterMatches) {
         const filterRegion = filterMatches[1];
-        const filterType = filterMatches[2] === 'tag' ? 'tags' : filterMatches[2] === 'category' ? 'categories' : filterMatches[2];
+        const filterType = filterMatches[2] === 'tag' ? 'tags' : (filterMatches[2] === 'category' ? 'categories' : filterMatches[2]);
         const filterKeyword = decodeURI(filterMatches[3].split('/').pop());
         const filterApiUrl = new URL(`${filterRegion}/${apiSlug}/${filterType}?search=${filterKeyword}`, rootUrl).href;
 
