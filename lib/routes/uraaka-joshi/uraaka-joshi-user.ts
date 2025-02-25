@@ -18,9 +18,11 @@ export const route: Route = {
         supportPodcast: false,
         supportScihub: false,
     },
-    radar: {
-        source: ['uraaka-joshi.com/:id'],
-    },
+    radar: [
+        {
+            source: ['uraaka-joshi.com/:id'],
+        },
+    ],
     name: 'User',
     maintainers: ['SettingDust', 'Halcao'],
     handler,
@@ -40,9 +42,9 @@ async function handler(ctx) {
             page.on('request', (request) => {
                 request.resourceType() === 'document' || request.resourceType() === 'script' || request.resourceType() === 'fetch' ? request.continue() : request.abort();
             });
-            page.on('requestfinished', (request) => {
+            page.on('requestfinished', async (request) => {
                 if (request.url() === link && request.response().status() === 403) {
-                    page.close();
+                    await page.close();
                 }
             });
 
